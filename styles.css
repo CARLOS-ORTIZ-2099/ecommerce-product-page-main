@@ -1,0 +1,19 @@
+body{
+    position: relative;
+    min-height: 100vh;
+}
+
+img{
+    width: 300px;
+}
+
+.custom{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, .7);
+   
+}
+
