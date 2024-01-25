@@ -79,4 +79,3 @@ function showNextImage(gallery, imgMain) {
     let src = gallery[indice].getAttribute('src')
     imgMain.setAttribute('src', src)
 }
-
