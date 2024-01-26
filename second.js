@@ -1,66 +1,81 @@
-const imgMain = document.querySelector('.img-alone');
-const galleryContainer = document.querySelector('.gallery-container');
-const gallery = document.querySelectorAll('.gallery .imgs');
-let currentIndex = null;
+const imgs = document.querySelectorAll('.imgs')
+const imgmain = document.querySelector('.img-alone')
+const galleryContainer = document.querySelector('.gallery-container')
+const imgsgallery = document.querySelectorAll('.gallery .imgs')
+let indice = null
+// console.log(galleryContainer);
 
-gallery.forEach((img, index) => {
-    img.addEventListener('click', () => openLightbox(index));
-});
+imgsgallery.forEach((img, index) => {
+    //console.log(imgsgallery);
+    img.addEventListener('click', (e) => {
+        indice = index
+        console.log(indice);
+        seterImg(e, imgmain)    
+    })
+})
 
-function openLightbox(index) {
-    currentIndex = index;
-    const lightboxContainer = createLightboxContainer();
-    updateLightboxContent(lightboxContainer);
-    document.body.appendChild(lightboxContainer);
+imgmain.addEventListener('click', () => openLightbox())
+
+function openLightbox() {
+        const lightboxContainer = galleryContainer.cloneNode(true)
+        document.body.appendChild(lightboxContainer)
+        lightboxContainer.classList.add('custom')
+    
+        const closeButton = document.createElement('button')
+        closeButton.classList.add('close')
+        closeButton.innerHTML = 'X'
+        lightboxContainer.appendChild(closeButton)
+        //console.log(lightboxContainer);
+    
+        const galleryClone = document.querySelectorAll('.custom .gallery .imgs')
+        console.log(galleryClone);
+        const imgMainClone = document.querySelector('.custom .img-main .img-alone')
+        console.log(imgMainClone);
+
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = 'Prev';
+        prevButton.addEventListener('click', () => showPrevImage(galleryClone, imgMainClone));
+
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = 'Next';
+        nextButton.addEventListener('click', () => showNextImage(galleryClone, imgMainClone));
+
+       lightboxContainer.appendChild(prevButton)
+       lightboxContainer.appendChild(nextButton)
+
+        galleryClone.forEach((ele, index) => {
+            ele.addEventListener('click', (e) => {
+                indice = index
+                console.log(indice);
+                seterImg(e, imgMainClone)
+            })
+        })
+    
+        closeButton.addEventListener('click', (e) =>{
+            lightboxContainer.remove()
+        }) 
+    
 }
 
-function createLightboxContainer() {
-    const lightboxContainer = document.createElement('div');
-    lightboxContainer.classList.add('custom');
-    const closeButton = createButton('X', () => closeLightbox(lightboxContainer));
-    const prevButton = createButton('Prev', showPrevImage);
-    const nextButton = createButton('Next', showNextImage);
-
-    lightboxContainer.appendChild(closeButton);
-    lightboxContainer.appendChild(prevButton);
-    lightboxContainer.appendChild(nextButton);
-
-    return lightboxContainer;
+function seterImg(e, nodo) {
+    let src = e.target.getAttribute('src')
+    nodo.setAttribute('src', src)
 }
 
-function createButton(text, onClick) {
-    const button = document.createElement('button');
-    button.innerHTML = text;
-    button.addEventListener('click', onClick);
-    return button;
+function showPrevImage(gallery, imgMain) {
+   if(indice <= 0) return 
+   indice -=1
+   console.log(indice);
+   let src = gallery[indice].getAttribute('src')
+   imgMain.setAttribute('src', src)
+
 }
 
-function closeLightbox(lightboxContainer) {
-    lightboxContainer.remove();
-    currentIndex = null;
-}
 
-function updateLightboxContent(lightboxContainer) {
-    const imgMainClone = imgMain.cloneNode(true);
-    lightboxContainer.innerHTML = '';
-    lightboxContainer.appendChild(imgMainClone);
-}
-
-function showPrevImage() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateImage();
-    }
-}
-
-function showNextImage() {
-    if (currentIndex < gallery.length - 1) {
-        currentIndex++;
-        updateImage();
-    }
-}
-
-function updateImage() {
-    const src = gallery[currentIndex].getAttribute('src');
-    imgMain.setAttribute('src', src);
+function showNextImage(gallery, imgMain) {
+    if(indice >=gallery.length-1) return
+    indice +=1
+    console.log(indice);
+    let src = gallery[indice].getAttribute('src')
+    imgMain.setAttribute('src', src)
 }

@@ -1,81 +1,88 @@
-const imgs = document.querySelectorAll('.imgs')
-const imgmain = document.querySelector('.img-alone')
-const galleryContainer = document.querySelector('.gallery-container')
-const imgsgallery = document.querySelectorAll('.gallery .imgs')
-let indice = null
-// console.log(galleryContainer);
 
-imgsgallery.forEach((img, index) => {
-    //console.log(imgsgallery);
+
+const imgs = document.querySelectorAll('.imgs')
+const galleryContainer = document.querySelector('.gallery-container')
+const imgMain = document.querySelector('.gallery-container .img-main')
+const gallery = document.querySelectorAll('.gallery-container .gallery .imgs')
+let currentIndex = null
+
+
+const galleryContainerClone = document.querySelector('.gallery-container-clone')
+const imgMainClone = document.querySelector('.gallery-container-clone .img-main-container .img-main')
+const galleryClone = document.querySelectorAll('.gallery-container-clone .gallery .imgs')
+let containerButtons = document.createElement('div')
+
+gallery.forEach((img, index) => {
     img.addEventListener('click', (e) => {
-        indice = index
-        console.log(indice);
-        seterImg(e, imgmain)    
+        currentIndex = index
+        console.log(currentIndex);
+        seterImg(e, imgMain)    
     })
 })
 
-imgmain.addEventListener('click', () => openLightbox())
-
-function openLightbox() {
-        const lightboxContainer = galleryContainer.cloneNode(true)
-        document.body.appendChild(lightboxContainer)
-        lightboxContainer.classList.add('custom')
-    
-        const closeButton = document.createElement('button')
-        closeButton.classList.add('close')
-        closeButton.innerHTML = 'X'
-        lightboxContainer.appendChild(closeButton)
-        //console.log(lightboxContainer);
-    
-        const galleryClone = document.querySelectorAll('.custom .gallery .imgs')
-        console.log(galleryClone);
-        const imgMainClone = document.querySelector('.custom .img-main .img-alone')
-        console.log(imgMainClone);
-
-        const prevButton = document.createElement('button');
-        prevButton.innerHTML = 'Prev';
-        prevButton.addEventListener('click', () => showPrevImage(galleryClone, imgMainClone));
-
-        const nextButton = document.createElement('button');
-        nextButton.innerHTML = 'Next';
-        nextButton.addEventListener('click', () => showNextImage(galleryClone, imgMainClone));
-
-       lightboxContainer.appendChild(prevButton)
-       lightboxContainer.appendChild(nextButton)
-
-        galleryClone.forEach((ele, index) => {
-            ele.addEventListener('click', (e) => {
-                indice = index
-                console.log(indice);
-                seterImg(e, imgMainClone)
-            })
-        })
-    
-        closeButton.addEventListener('click', (e) =>{
-            lightboxContainer.remove()
-        }) 
-    
-}
+galleryClone.forEach((img, index) => {
+    img.addEventListener('click', (e) => {
+        currentIndex = index
+        console.log(currentIndex);
+        seterImg(e, imgMainClone)    
+    })
+})
 
 function seterImg(e, nodo) {
     let src = e.target.getAttribute('src')
     nodo.setAttribute('src', src)
 }
 
-function showPrevImage(gallery, imgMain) {
-   if(indice <= 0) return 
-   indice -=1
-   console.log(indice);
-   let src = gallery[indice].getAttribute('src')
-   imgMain.setAttribute('src', src)
+
+imgMain.addEventListener('click', (e) => openLightbox(e))
+
+function openLightbox(e) {
+    console.log(e.target);
+        galleryContainerClone.classList.remove('hidden')
+        galleryContainerClone.classList.add('custom')
+        console.log(imgMainClone);
+        seterImg(e, imgMainClone)
+        
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = 'Prev';
+        prevButton.addEventListener('click', () => showPrevImage());
+
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = 'Next';
+        nextButton.addEventListener('click', () => showNextImage());
+
+        const closeButton = document.createElement('button')
+        closeButton.addEventListener('click', removeModal)
+        closeButton.classList.add('close')
+        closeButton.innerHTML = 'X'
+
+        containerButtons.append(closeButton,prevButton, nextButton )
+        galleryContainerClone.appendChild(containerButtons)
+}
+
+function removeModal(){
+    galleryContainerClone.classList.add('hidden')
+    galleryContainerClone.classList.remove('custom')
+    containerButtons.innerHTML = ``
+}
+
+
+function showPrevImage() {
+   if(currentIndex <= 0) return 
+   currentIndex -=1
+   console.log(currentIndex);
+   let src = galleryClone[currentIndex].getAttribute('src')
+   imgMainClone.setAttribute('src', src)
 
 }
 
 
-function showNextImage(gallery, imgMain) {
-    if(indice >=gallery.length-1) return
-    indice +=1
-    console.log(indice);
-    let src = gallery[indice].getAttribute('src')
-    imgMain.setAttribute('src', src)
+function showNextImage() {
+    if(currentIndex >=galleryClone.length-1) return
+    currentIndex +=1
+    console.log(currentIndex);
+    let src = galleryClone[currentIndex].getAttribute('src')
+    imgMainClone.setAttribute('src', src)
 }
+
+
