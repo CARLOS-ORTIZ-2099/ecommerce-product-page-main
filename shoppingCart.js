@@ -21,16 +21,15 @@ function handleBuyButtonClick(e){
         const total = price*quantity
 
         if(shoppingCart.some((product) => product.id === id)){
-            const findProduct = shoppingCart.find((product) => product.id == id)
             shoppingCart = shoppingCart.map((product) => product.id === id ?
-             {...findProduct, quantity:findProduct.quantity + quantity, total : findProduct.total+total} : product)
-            console.log(shoppingCart);   
-           
+             {...product, quantity:product.quantity + quantity, total : product.total+total} : product)
+            console.log(shoppingCart);     
         }
-       else {
+
+        else {
             shoppingCart.push({id, name, price, quantity, total})
             console.log(shoppingCart);
-       } 
+        } 
        quantityText[id].textContent = 0   
        renderProductsCart()
 }

@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body{
     position: relative;
     min-height: 100vh;
@@ -26,3 +31,127 @@ img{
 .hidden {
     display: none;
 }
+
+
+/* estilos para el navbar */
+
+
+.nav-container {
+    background-color: #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+}
+.nav-container img{
+    width: 100%;
+}
+
+.nav-container .child-1{
+    display: flex;
+    align-items: center;
+    border: solid blue 1px;
+   
+}
+/* .ul-container{
+    border: solid yellow 5px;
+} */
+.nav-container .child-1 .menu-image{
+    margin: 0 20px;
+    display: none;
+}
+
+.nav-container .child-1 .close-image{
+    display: none;
+}
+.nav-container .child-1 .list-item{
+    display: flex;
+    border: solid rgb(43, 133, 207);
+}
+
+
+.list-container li{
+    list-style: none;
+    margin: 0 25px;
+}
+
+.list-container a{
+    text-decoration: none;
+}
+
+
+
+
+.nav-container .child-2{
+    display: flex;
+    border: solid rgb(144, 31, 214) 1px;
+    align-items: center;
+}
+
+.nav-container .child-2 .image-cart{
+   width: 30px;
+   margin-right: 55px;
+}
+
+.nav-container .child-2 .image-avatar{
+    width: 40px;
+}
+
+
+@media screen and (max-width : 800px) {
+    .nav-container .child-1 .ul-container{
+        position: absolute;
+        background-color: rgba(0, 0, 55, .7);
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .7);
+        border: solid green 2px;
+        visibility: hidden;
+    }
+    .nav-container .child-1 .list-container{
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: solid red;
+        flex-wrap: wrap;
+        background-color: white;
+    }
+    .nav-container .child-1 .list-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border: solid rgb(43, 133, 207);
+        height: 200px;
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    .nav-container .child-1 .close-image{
+        display: block;
+        width: 15px;
+        margin-left: 22px;
+    }
+    .list-container li a{
+        color: rgb(39, 39, 40);
+    }
+    .nav-container .child-1 .menu-image{
+        margin: 0 20px;
+        display: block;
+    }
+
+    .nav-container .child-2 .image-cart{
+        width: 20px;
+        margin-right: 7px;
+     }
+     
+     .nav-container .child-2 .image-avatar{
+         width: 25px;
+     }
+     
+}
+
