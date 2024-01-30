@@ -1,12 +1,14 @@
-
-
 const imgs = document.querySelectorAll('.imgs')
 const galleryContainer = document.querySelector('.gallery-container')
 const imgMain = document.querySelector('.gallery-container .img-main')
 const gallery = document.querySelectorAll('.gallery-container .gallery .imgs')
+const menuImage =  document.querySelector('.menu-image')
+const ulContainer = document.querySelector('.ul-container')
+const closeImage = document.querySelector('.close-image')
 let currentIndex = null
 
 
+const absolue = document.querySelector('.absolute')
 const galleryContainerClone = document.querySelector('.gallery-container-clone')
 const imgMainClone = document.querySelector('.gallery-container-clone .img-main-container .img-main')
 const galleryClone = document.querySelectorAll('.gallery-container-clone .gallery .imgs')
@@ -45,10 +47,12 @@ function openLightbox(e) {
         
         const prevButton = document.createElement('button');
         prevButton.innerHTML = 'Prev';
+        prevButton.classList.add('prev')
         prevButton.addEventListener('click', () => showPrevImage());
 
         const nextButton = document.createElement('button');
         nextButton.innerHTML = 'Next';
+        nextButton.classList.add('next')
         nextButton.addEventListener('click', () => showNextImage());
 
         const closeButton = document.createElement('button')
@@ -57,7 +61,8 @@ function openLightbox(e) {
         closeButton.innerHTML = 'X'
 
         containerButtons.append(closeButton,prevButton, nextButton )
-        galleryContainerClone.appendChild(containerButtons)
+        containerButtons.classList.add('buttons-container')
+        absolue.appendChild(containerButtons)
 }
 
 function removeModal(){
@@ -85,4 +90,9 @@ function showNextImage() {
     imgMainClone.setAttribute('src', src)
 }
 
-
+menuImage.addEventListener('click',(e)=>{
+    ulContainer.style.visibility=  'visible'
+})
+closeImage.addEventListener('click',(e)=>{
+    ulContainer.style.visibility=  'hidden'
+})
