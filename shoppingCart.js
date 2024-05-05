@@ -9,9 +9,7 @@ let shoppingCart = []
 console.log(quantityText);
 console.log(btnBuy);
 
-btnBuy.forEach((btn) => {
-    btn.addEventListener('click', handleBuyButtonClick )
-})
+btnBuy.forEach((btn) => btn.addEventListener('click', handleBuyButtonClick ))
 
 function handleBuyButtonClick(e){
         const id = e.target.parentElement.parentElement.id
@@ -44,11 +42,11 @@ sectionProducts.addEventListener('click', handleProductQuantityChange)
 function handleProductQuantityChange(e) {
         let id = e.target.parentElement.parentElement.id
         if(e.target.matches('.more')){
-            let quantity =  quantityText[id].textContent++
+             quantityText[id].textContent++
         }
         if(e.target.matches('.less')){
             if(quantityText[id].textContent >0 ){
-                let quantity =  quantityText[id].textContent--
+              quantityText[id].textContent--
             }  
             
         }
@@ -56,23 +54,22 @@ function handleProductQuantityChange(e) {
 
 function renderProductsCart(){
     let data = ``
-
     shoppingCart.forEach((product) => {
         data+= `
             <div>
-                <h1>name :${product.name}</h1>
+                <h1>name : ${product.name}</h1>
                 <h1>price :  ${product.price}</h1>
                 <h1>quantity: ${product.quantity}</h1>
-                <h1>total : ${product.total}</h1>
-                <button class = 'checkout'>Checkout</button>
+                <h1>total : ${product.total}$</h1>
+                <button class = 'btnCheckout'>Checkout</button>
             </div>
         `
     })
     shoppingCartContainer.innerHTML = data
-    const checkout = document.querySelector('.checkout')
-    checkout.addEventListener('click', (e) => {
-        alert()
+    const btnCheckout = document.querySelector('.btnCheckout')
+    btnCheckout.addEventListener('click', (e) => {
         shoppingCartContainer.innerHTML ='your cart empty'
+        shoppingCart = []
     })
 }
 

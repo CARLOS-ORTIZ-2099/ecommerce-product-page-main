@@ -227,31 +227,47 @@ img{
 }
 .buttons-container .close{
     position: absolute;
-    top: -7%;
-    right: 0;
+    top: -11%;
+    right: 4%;
+    width: 10%;
+    cursor: pointer;
 }
 .buttons-container .next{
     position: absolute;
-    right: 0;
+    right: 4%;
     top: 35%;
+    width: 10%;
+    cursor: pointer;
 }
 .buttons-container .prev{
     position: absolute;
-    left: 0;
+    left: 0%;
     top: 35%;
+    width: 10%;
+    cursor: pointer;
 }
 
 .shopping-cart-container{
     background-color: rgb(246, 246, 246);
-    padding: 1rem;
+    padding: 1.5rem;
     width: 250px;
+    height: 180px;
     position: absolute;
     left: 72%;
-    height: 150px;
     border-radius: 10px;
     z-index: 999;
-    
+    font-family: 'Times New Roman', Times, serif;
 }
+
+.btnCheckout {
+    padding: .5rem;
+    border-radius: 5px;
+    display: block;
+    margin: 5px auto 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 @media screen and (max-width : 800px) {
     .nav-container .child-1 .ul-container{
         position: absolute;
@@ -357,7 +373,7 @@ img{
         position: absolute;
         left: 0;
         top: 90px;
-        height: 30%;
+        height: 25%;
         border-radius: 10px;
         
     }

@@ -8,7 +8,7 @@ const closeImage = document.querySelector('.close-image')
 let currentIndex = null
 
 
-const absolue = document.querySelector('.absolute')
+const absolute = document.querySelector('.absolute')
 const galleryContainerClone = document.querySelector('.gallery-container-clone')
 const imgMainClone = document.querySelector('.gallery-container-clone .img-main-container .img-main')
 const galleryClone = document.querySelectorAll('.gallery-container-clone .gallery .imgs')
@@ -45,24 +45,24 @@ function openLightbox(e) {
         console.log(imgMainClone);
         seterImg(e, imgMainClone)
         
-        const prevButton = document.createElement('button');
-        prevButton.innerHTML = 'Prev';
+        const prevButton = document.createElement('img');
+        prevButton.src = './images/icon-previous.svg';
         prevButton.classList.add('prev')
         prevButton.addEventListener('click', () => showPrevImage());
 
-        const nextButton = document.createElement('button');
-        nextButton.innerHTML = 'Next';
+        const nextButton = document.createElement('img');
+        nextButton.src = './images/icon-next.svg';
         nextButton.classList.add('next')
         nextButton.addEventListener('click', () => showNextImage());
 
-        const closeButton = document.createElement('button')
-        closeButton.addEventListener('click', removeModal)
+        const closeButton = document.createElement('img')
+        closeButton.src = './images/icon-close.svg'
         closeButton.classList.add('close')
-        closeButton.innerHTML = 'X'
+        closeButton.addEventListener('click', removeModal)
 
         containerButtons.append(closeButton,prevButton, nextButton )
         containerButtons.classList.add('buttons-container')
-        absolue.appendChild(containerButtons)
+        absolute.appendChild(containerButtons)
 }
 
 function removeModal(){
